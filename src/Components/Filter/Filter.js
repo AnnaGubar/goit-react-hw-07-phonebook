@@ -1,7 +1,11 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilter } from '../../redux/filterSlice';
 import s from './Filter.module.css';
 
-function Filter({value,onChange}) {
-  
+function Filter() {
+  const dispatch = useDispatch();
+  const filter = useSelector(state => state.filter.value);
+
   return (
     <form>
       <label>
@@ -9,8 +13,8 @@ function Filter({value,onChange}) {
         <input
           className={s.Filter_input}
           type="text"
-          value={value}
-          onChange={e=>onChange(e.target.value)} 
+          value={filter}
+          onChange={e => dispatch(setFilter(e.target.value))}
           placeholder="Enter something to start searching"
         />
       </label>
