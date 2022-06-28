@@ -1,13 +1,15 @@
-import { nanoid } from 'nanoid';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useState } from 'react';
-import { useContacts } from '../hooks/useContacts';
+import { useContacts } from '../../hooks/useContacts';
 import s from './ContactForm.module.css';
 
 function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const { addContact, isContactExists } = useContacts();
+  const { isContactExists, addContact } = useContacts();
 
   const handleChange = e => {
     if (e.currentTarget.name === 'name') {
@@ -22,19 +24,25 @@ function ContactForm() {
     e.preventDefault();
 
     const newContact = {
-      id: nanoid(),
       name,
       number,
     };
 
     if (isContactExists(newContact)) {
       console.log('уже есть, пропускаю');
-      alert(`${newContact.name} is already in contacts.`);
+      toast.error(`${newContact.name} is already in contacts.`);
       return;
     }
 
-    console.log('новый, создаю');
-    addContact(newContact);
+    try {
+      console.log('новый, создаю');
+      addContact(newContact);
+      toast.success('New contact is added');
+    } catch (error) {
+      toast.error('Something went wrong');
+      console.log(error);
+    }
+    
     reset();
   };
 
@@ -74,6 +82,7 @@ function ContactForm() {
       <button className={s.submit} type="submit">
         Add contact
       </button>
+      <ToastContainer />
     </form>
   );
 }
