@@ -1,12 +1,6 @@
-// import { useContacts } from '../../hooks/useContacts';
 import s from './Filter.module.css';
 
-function Filter() {
-  // const {filterValue } = useContacts();
-  
-  // const getfilterValue = e => {
-  //   filterValue(e.currentTarget.value);
-  // };
+function Filter({value,onChange}) {
   
   return (
     <form>
@@ -15,8 +9,8 @@ function Filter() {
         <input
           className={s.Filter_input}
           type="text"
-          // value={value}
-          // onChange={getfilterValue} //!
+          value={value}
+          onChange={e=>onChange(e.target.value)} 
           placeholder="Enter something to start searching"
         />
       </label>

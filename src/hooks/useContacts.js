@@ -1,4 +1,3 @@
-import { useSelector, useDispatch } from 'react-redux';
 import {
   useGetContactsQuery,
   useAddContactMutation,
@@ -23,14 +22,7 @@ const [deleteContact] = useDeleteContactMutation();
     addContact,
     deleteContact,
     isContactExists,
+    transformValue,
   };
 }
-
-//   const filter = useSelector(state => state.contacts.filter);
-
-//   const filterValue = value =>
-//     dispatch(setFilterReducer(transformValue(value)));
-
-//   const filterContacts = () =>
-//     contacts.filter(contact => contact.name.includes(filter));
 

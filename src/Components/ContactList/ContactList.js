@@ -2,23 +2,15 @@ import ContactListItem from './ContactListItem';
 import { useContacts } from '../../hooks/useContacts';
 import s from './ContactList.module.css';
 
-function ContactList() {
+
+function ContactList({filteredContacts}) {
   const {data}=useContacts();
+
 
   return (
     <ul className={s.list}>
-      {/* {contacts &&
-        filterContacts(contacts).map(({ id, name, number }) => (
-          <ContactListItem
-            key={id}
-            id={id}
-            name={name}
-            number={number}
-            deleteContact={deleteContact}
-          />
-        ))} */}
       {data &&
-        data.map(({ id, name, number }) => (
+        filteredContacts.map(({ id, name, number }) => (
           <ContactListItem
             key={id}
             id={id}
